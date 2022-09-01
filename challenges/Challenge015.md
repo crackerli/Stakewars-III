@@ -1,7 +1,7 @@
 # Stake Wars: Episode III. Challenge 015
 * Published on: 2022-08-30
 * Updated on: 2022-08-30
-* Submitted by: Viboracecata
+* Submitted by: viboracecata
 
 Setup a kuutamo High Availability (HA) NEAR Validator running on `localnet` and `testnet`
 
@@ -29,11 +29,11 @@ This guide shows how to deploy kuutamod along with neard on Hetzner VPS for loca
 | Storage        | 240GB SSD                                  |
 
 #### Load ISO image of NixOS 22.05
-![img](./images/Challenge015-1.png)
+![img](./Challenge015-1.png)
 poweroff then poweron
 
 #### Login from Hetzner console 
-![img](./images/Challenge015-2.png)
+![img](./Challenge015-2.png)
 #### Create password for root user
 ```
 sudo passwd root
@@ -113,13 +113,13 @@ git clone https://github.com/kuutamolabs/kuutamod
 cd kuutamod
 nix develop
 ```
-![img](./images/Challenge015-3.png)
+![img](./Challenge015-3.png)
 
 #### After running nix develop or installing the dependencies, run the command hivemind:
 ```
 hivemind
 ```
-![img](./images/Challenge015-4.png)
+![img](./Challenge015-4.png)
 
 #### Open second ssh terminal to build and run first Near Validator Node
 ```
@@ -135,7 +135,7 @@ nix develop
   --validator-key .data/near/localnet/node3/validator_key.json \
   --near-boot-nodes $(jq -r .public_key < .data/near/localnet/node0/node_key.json)@127.0.0.1:33301
 ```
-![img](./images/Challenge015-5.png)
+![img](./Challenge015-5.png)
 
 #### Open third ssh terminal to build and run second Near Voting Node
 ```
@@ -152,7 +152,7 @@ nix develop
   --validator-key .data/near/localnet/node3/validator_key.json \
   --near-boot-nodes $(jq -r .public_key < .data/near/localnet/node0/node_key.json)@127.0.0.1:33301
 ```
-![img](./images/Challenge015-6.png)
+![img](./Challenge015-6.png)
 
 #### Open fourth ssh terminal to check Nodes status
 ##### Check first validating node status
@@ -216,9 +216,9 @@ lrwxrwxrwx  1 root root   64 Aug 30 09:57 node_key.json -> /root/kuutamod/.data/
 #### Experiment of failover
 To see if first validating node is offline, the second voting node could take over validating.     
 If we now stop the first validating node instance by pressing ctrl-c...
-![img](./images/Challenge015-7.png)
+![img](./Challenge015-7.png)
 We can see that the second voting node instance takes over:
-![img](./images/Challenge015-8.png)
+![img](./Challenge015-8.png)
 Check first node metric
 ```
 curl http://localhost:2233/metrics
@@ -415,7 +415,7 @@ Name: my-validator
 where name is the kuutamo node id.    
 
 `journalctl -u kuutamod -f | grep "INFO stats:"`
-![img](./images/Challenge015-9.png)     
+![img](./Challenge015-9.png)     
 
 `curl http://localhost:2233/metrics`
 ```console
@@ -509,8 +509,8 @@ nixos-version
 journalctl -u kuutamod.service | grep 'state changed'
 systemctl status kuutamod
 ```
-![img](./images/Challenge015-12.png) 
-![img](./images/Challenge015-13.png) 
+![img](./Challenge015-12.png) 
+![img](./Challenge015-13.png) 
 
 We can see the status of voting node is validating after main node is shutdown.
 
